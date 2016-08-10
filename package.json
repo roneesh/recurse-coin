@@ -1,0 +1,14 @@
+{
+  "name": "ethereum",
+  "version": "1.0.0",
+  "description": "a test of web3.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roneesh Vashisht",
+  "license": "ISC",
+  "dependencies": {
+    "web3": "^0.17.0-alpha"
+  }
+}
