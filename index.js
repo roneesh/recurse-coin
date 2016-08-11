@@ -8,12 +8,17 @@ $(document).ready(function() {
 
 	var rcAddress = '0x791E39A210B49811459531A54790377540eFfcde';
 	var recurseCoin = eth.contract(rcABI).at(rcAddress);
-	var wallet = web3.eth.coinbase;
+	web3.eth.defaultAccount = web3.eth.accounts[0];
+	var wallet = web3.eth.defaultAccount;
+
+	console.log(recurseCoin);
+
+	console.log(wallet);
 
 	$('#send-coins').on('click', function() {
 		$('.status-box').removeClass('status-success status-error');
 		var value = $('#amount').val();
-		var transaction = recurseCoin.mint(wallet, value);
+		var transaction = recurseCoin.mint(wallet, parseInt(value, 10));
 		if (transaction) {
 			$('.status-box').addClass('status-success');
 			$('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
