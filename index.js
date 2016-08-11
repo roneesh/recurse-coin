@@ -13,9 +13,10 @@ $(document).ready(function() {
 	$('#send-coins').on('click', function() {
 
     // Password will only have been entered if account is locked
-    if ($('#password')) {
+    if ($('#password').text()) {
       var pwd = $('#password')
       web3.personal.unlockAccount(wallet, pwd);
+      $('.pwd-field').hide();
     }
 
 		var value = $('#amount').val();
@@ -25,7 +26,7 @@ $(document).ready(function() {
         $('.status-box').addClass('status-error');
         $('.status-msg').text(err.message);
         if (err.message == "account is locked") {
-          $('#password').show();
+          $('.pwd-field').show();
         }
 			}
 			else {
