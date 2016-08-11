@@ -14,7 +14,7 @@
 	p, label {
 	  color: #3c3c3c;
 	}
-	#address-field, #get-coins {
+	.input, #from-field, #send-coins {
 	  background-color: #FFFFFF;
 	  height: 32px;
 	  font-family: inherit;
@@ -26,6 +26,7 @@
 	  font-size: 16px;
 	  padding: 4px;
 	  padding-left: 8px;
+	  margin-bottom: 10px;
 	}
 	#get-coins {
 	  height: 42px;
@@ -66,6 +67,7 @@
 	}
 
 	</style>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script src="web3.min.js"></script>
 	<script src="index.js"></script>
 </head>
@@ -76,11 +78,23 @@
 	<div class="status-box status-success">
 	  <p class="status-msg">Success! Your wallet X8JZP... got 10 RC Coins!</p>
 	</div>
-	<label for="address-field">
+	<label for="from-field">
 	  Your wallet number: 
 	</label>
-	<input type="text" id="address-field" />
-	<input type="button" id="get-coins" value="Get Coins!"/>
+	<input class="input" type="text" id="from-field" /><br/>
+	<label for="to-field">
+	  Their wallet number:
+	</label>
+	<input class="input" type="text" id="to-field" /><br/>
+	<label for="amount">
+	  Amount (in ether):
+	</label>
+	<input class="input" type="text" id="amount" /><br/>
+	<label for="password">
+	  Your wallet password:
+	</label>
+	<input class="input" type="password" id="password" /><br/>
+	<input type="button" id="send-coins" value="Get Coins!"/>
 </body>
 
 </html>

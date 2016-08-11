@@ -1,18 +1,16 @@
-// var Web3 = require('web3');
-var web3 = new Web3();
-var eth = web3.eth;
-web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
-console.log(web3);
-var coinbase = eth.coinbase;
-var balance = eth.getBalance(coinbase);
-var defaultAccount = eth.defaultAccount;
+$(document).ready(function() {
+	var web3 = new Web3();
+	var eth = web3.eth;
+	web3.setProvider(new web3.providers.HttpProvider('http://127.0.0.1:8545'));
 
-// console.log(web3);
-var transaction = {
-	'from': "0x4884711efc182b3a377c9ec015963443afbdb519",
-	'to': "0x99Fc781Bb64c1C932b4379424d7a11EB22777E94",
-	'value': web3.toWei(11, "ether")
-
-}
-var transactionResult = web3.eth.sendTransaction(transaction);
-console.log(transactionResult)
+	$('#send-coins').on('click', function() {
+		var transaction = {
+			'from': $('#from-field').val(),
+			'to': $('#to-field').val(),
+			'value': web3.toWei(parseInt($('#amount').val(), 10), "ether"),
+			'pwd' : $('#password').val()
+		}
+		var transactionResult = web3.eth.sendTransaction(transaction);
+		alert(transactionResult);
+	});
+});
