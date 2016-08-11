@@ -8,8 +8,12 @@ $(document).ready(function() {
 
 	var rcAddress = '0x791E39A210B49811459531A54790377540eFfcde';
 	var recurseCoin = eth.contract(rcABI).at(rcAddress);
-	web3.eth.defaultAccount = web3.eth.accounts[0];
-	var wallet = web3.eth.defaultAccount;
+	var wallet = web3.eth.defaultAccount = web3.eth.accounts[0];
+
+	if ($('#password')) {
+		var pwd = $('#password')
+		// web3.personal.unlockAccount(wallet, )
+	}
 
 	console.log(recurseCoin);
 
