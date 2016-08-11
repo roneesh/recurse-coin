@@ -8,21 +8,33 @@ $(document).ready(function() {
 
 	var rcAddress = '0x791E39A210B49811459531A54790377540eFfcde';
 	var recurseCoin = eth.contract(rcABI).at(rcAddress);
-	web3.eth.defaultAccount = web3.eth.accounts[0];
-	var wallet = web3.eth.defaultAccount;
+	var wallet = web3.eth.defaultAccount = web3.eth.accounts[0];
 
 	$('#send-coins').on('click', function() {
+
+    // Password will only have been entered if account is locked
+    if ($('#password')) {
+      var pwd = $('#password')
+      web3.personal.unlockAccount(wallet, pwd);
+    }
+
 		var value = $('#amount').val();
-    try {
-  		var transaction = recurseCoin.mint(wallet, value);
-      $('.status-box').addClass('status-success');
-      $('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
-		} catch(e) {
-			$('.status-box').addClass('status-error');
-			$('.status-msg').text(e.message);
-		}
-    setTimeout(function() {
-  		$('.status-box').removeClass('status-success status-error');
-    }, 1000);
+		var transaction = recurseCoin.mint(wallet, parseInt(value, 10), function(err, success) {
+			if (err) {
+				console.log(err)
+        $('.status-box').addClass('status-error');
+        $('.status-msg').text(err.message);
+        if (err.message == "account is locked") {
+          $('#password').show();
+        }
+			}
+			else {
+				$('.status-box').addClass('status-success');
+				$('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
+			}
+      setTimeout(function() {
+        $('.status-box').removeClass('status-success status-error');
+      }, 1000);
+		});
 	});
 });

@@ -66,6 +66,9 @@
 	.status-error .status-msg {
 	  color: rgba(0,0,0,0.75);
 	}
+	.pwd-field {
+		display: none;
+	}
 
 	</style>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -83,6 +86,12 @@
 	  Amount (in recurse-coins):
 	</label>
 	<input class="input" id="amount" /><br/>
+	<div class="pwd-field">
+		<label for="password">
+		  Please input your password, your wallet is locked
+		</label>
+		<input class="input" type="password" id="amount" /><br/>
+	</div>
 	<input type="button" id="send-coins" value="Get Coins!"/>
 </body>
 
