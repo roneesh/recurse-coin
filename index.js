@@ -11,12 +11,17 @@ $(document).ready(function() {
 	var wallet = web3.eth.coinbase;
 
 	$('#send-coins').on('click', function() {
-		$('.status-box').removeClass('status-success status-error');
 		var value = $('#amount').val();
-		var transaction = recurseCoin.mint(wallet, value);
-		if (transaction) {
-			$('.status-box').addClass('status-success');
-			$('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
+    try {
+  		var transaction = recurseCoin.mint(wallet, value);
+      $('.status-box').addClass('status-success');
+      $('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
+		} catch(e) {
+			$('.status-box').addClass('status-error');
+			$('.status-msg').text(e.message);
 		}
+    setTimeout(function() {
+  		$('.status-box').removeClass('status-success status-error');
+    }, 1000);
 	});
 });
