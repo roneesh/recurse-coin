@@ -9,6 +9,7 @@
   "author": "Roneesh Vashisht",
   "license": "ISC",
   "dependencies": {
+    "solc": "^0.3.6",
     "web3": "^0.17.0-alpha"
   }
 }
