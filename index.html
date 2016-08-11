@@ -37,9 +37,9 @@
 	}
 
 	.status-box {
+    display: none;
 	  border: none;
 	  text-align: center;
-	  display: none;
 	  font-size: 13px;
 	  text-align: center;
 	  padding: 15px;
@@ -80,9 +80,6 @@
 	<img src="https://d29xw0ra2h4o4u.cloudfront.net/assets/logo-no-text-ab02ba4e6d854337f7d7515e08f57520a82883ace40d22b4de689435cc211ffd.png" alt="Logo no text">
 	<h1>Recurse Coin</h1>
 	<p>Get recurse coins! They'll be sent to your node's <i>web3.eth.coinbase</i> account</p>
-	<div class="status-box">
-	  <p class="status-msg"></p>
-	</div>
 	<label for="amount">
 	  Amount (in recurse-coins):
 	</label>
@@ -91,9 +88,12 @@
 		<label for="password">
 		  Please input your password, your wallet is locked
 		</label>
-		<input class="input" type="password" id="amount" /><br/>
+		<input class="input" type="password" id="password" /><br/>
 	</div>
 	<input type="button" id="send-coins" value="Get Coins!"/>
+	<div class="status-box">
+	  <p class="status-msg"></p>
+	</div>
 </body>
 
 </html>

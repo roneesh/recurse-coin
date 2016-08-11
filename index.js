@@ -13,10 +13,12 @@ $(document).ready(function() {
 	$('#send-coins').on('click', function() {
 
     // Password will only have been entered if account is locked
-    if ($('#password').text()) {
-      var pwd = $('#password')
+    console.log($('#password').val());
+    if ($('#password').val()) {
+      var pwd = $('#password').val();
       web3.personal.unlockAccount(wallet, pwd);
       $('.pwd-field').hide();
+      $('.status-box').removeClass('status-error');
     }
 
 		var value = $('#amount').val();
@@ -31,11 +33,11 @@ $(document).ready(function() {
 			}
 			else {
 				$('.status-box').addClass('status-success');
+        setTimeout(function() {
+          $('.status-box').removeClass('status-success');
+        }, 1500);
 				$('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
 			}
-      setTimeout(function() {
-        $('.status-box').removeClass('status-success status-error');
-      }, 1000);
 		});
 	});
 });
