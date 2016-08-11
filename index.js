@@ -22,10 +22,14 @@ $(document).ready(function() {
 	$('#send-coins').on('click', function() {
 		$('.status-box').removeClass('status-success status-error');
 		var value = $('#amount').val();
-		var transaction = recurseCoin.mint(wallet, parseInt(value, 10));
-		if (transaction) {
-			$('.status-box').addClass('status-success');
-			$('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
-		}
+		var transaction = recurseCoin.mint(wallet, parseInt(value, 10), function(err, success) {
+			if (err) {
+				console.log(err.message)
+			}
+			else {
+				$('.status-box').addClass('status-success');
+				$('.status-msg').text('Success! you added ' + value + ' recurse coins to account ' + wallet + ' on transaction ' + transaction);
+			}
+		});
 	});
 });
