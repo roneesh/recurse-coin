@@ -1,30 +1,37 @@
-contract TestRecurseCoin { 
+contract mortal {
+    address owner;
+
+    function mortal() { owner = msg.sender; }
+
+    function kill() { if (msg.sender == owner) selfdestruct(owner); }
+}
+
+contract Test2RecurseCoin is mortal { 
 	mapping (address => uint256) public balanceOf; 
-	
 	string public name; 
 	string public symbol; 
 	uint8 public decimals; 
 
-	function TestRecurseCoin(uint256 initialSupply, string tokenName, uint8 decimalUnits, string tokenSymbol) {
+	function Test2RecurseCoin(uint256 initialSupply, string tokenName, uint8 decimalUnits, string tokenSymbol) { 
 		balanceOf[msg.sender] = initialSupply; 
 		name = tokenName; 
 		symbol = tokenSymbol; 
-		decimals = decimalUnits; 
-	} 
-
-	function newBalance(uint256 newSupply) {
-		balanceOf[msg.sender] = newSupply;
-	}
+		decimals = decimalUnits; } 
 
 	function transfer(address _to, uint256 _value) { 
 		if (balanceOf[msg.sender] < _value || balanceOf[_to] + _value < balanceOf[_to]) 
 			throw; 
+		balanceOf[msg.sender] -= _value; balanceOf[_to] += _value; Transfer(msg.sender, _to, _value); } 
 
-		balanceOf[msg.sender] -= _value; 
-		balanceOf[_to] += _value; 
-
-		Transfer(msg.sender, _to, _value); 
+	function mint(address _to, uint256 _value) {
+		if (_to == 00)
+			_to = msg.sender;
+		if (balanceOf[_to] + _value < balanceOf[_to])
+			throw;
+		balanceOf[_to] += _value;
+		Mint(_to, _value);
 	}
 
 	event Transfer(address indexed from, address indexed to, uint256 value); 
+	event Mint(address indexed to, uint256 value);
 }
